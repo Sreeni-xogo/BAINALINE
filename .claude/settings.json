@@ -29,5 +29,19 @@
     ]
   },
 
-  "env": {}
+  "env": {},
+
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "commit|push|save|done|ship|merge|finish|complete|deploy|deployed|finished",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'ALINE REMINDER: After completing this action, generate a smart 1-line summary of what was accomplished and call: use aline — commit: {your summary here}. Then ask the user: \"Want me to update Aline? → {summary}\"'"
+          }
+        ]
+      }
+    ]
+  }
 }

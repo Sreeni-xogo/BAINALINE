@@ -53,6 +53,9 @@ Intents/
     CONTEXT.md        # Begin + Refine
     Status.md         # Progress tracking
     01.IntentName.md  # Intent files (after Arrange approval)
+
+Memory/
+  {IdeaFolder}.md     # Rolling distilled log of dissolved intents
 ```
 
 ---
@@ -90,9 +93,10 @@ Intents/
 | 1   | …    | Todo   | 2h   |        |       |
 
 > Claude may update **Status** column. Human owns **Actual** column.
+> Status values: Todo · In Progress · Done · Dissolved ✓ · Blocked
 
 ## Project State
-- **Status**: Active | Paused | Abandoned
+- **Status**: Active | Paused | Complete | Abandoned
 - **Reason**: (if paused/abandoned)
 - **Revisit trigger**: (if paused)
 ```
@@ -117,7 +121,30 @@ Created **only after Arrange approval**.
 ## Outcome (fill after Iterate)
 - **Actual Time**:
 - **Result**:
+- **Key Decisions**: (why this approach over alternatives)
 - **Follow-ups**:
+```
+
+### 4. Memory File (`Memory/{IdeaFolder}.md`)
+
+Created automatically on first dissolution. Never manually edited.
+
+```md
+# Memory — {IdeaTitle}
+
+> Auto-generated. Updated on each intent dissolution.
+> Human-readable record of all dissolved intents for this project.
+
+---
+
+## Intent {N} — {ShortName}
+**Dissolved:** {YYYY-MM-DD}
+**Goal:** …
+**Outcome:** …
+**Key Decisions:** …
+**Follow-ups:** …
+
+---
 ```
 
 ---
@@ -137,6 +164,14 @@ Created **only after Arrange approval**.
 
 ## Execution Order
 
+### Step 0 — Aline Recall (before anything else)
+Call Aline to retrieve prior context for this idea:
+> `use aline — what was I last working on for {IdeaTitle}?`
+
+If Aline returns prior context, summarise it for the user before proceeding to Step 1.
+
+---
+
 1. **Confirm**: Echo `IdeaTitle`, `BasePath`, derived `IdeaFolder`.
 2. **Create folders**: Ensure `{BasePath}/{IdeaFolder}/` exists.
 3. **Create or append CONTEXT.md**:
@@ -146,6 +181,13 @@ Created **only after Arrange approval**.
    - Ask **3–5 questions max per turn**
    - Map each question to a missing Refine field
    - Allow `TBD` answers
+
+### Step 4b — Aline Commit: Refine Locked
+After Refine interview is complete and scope is locked in CONTEXT.md:
+> `use aline — commit: BRAIN Refine locked for {IdeaFolder} — goal: {one-line goal summary}`
+
+---
+
 5. **Propose Arrange list**:
    - 5–10 intents, ≤2 hours each
    - Include brief DoD + dependencies
@@ -153,7 +195,59 @@ Created **only after Arrange approval**.
 6. **Wait for approval** (explicit yes or edits)
 7. **Create intent files**: Continue numbering from highest existing N
 8. **Create/update Status.md**
+
+### Step 7b — Aline Commit: Arrange Approved
+After intent files are created:
+> `use aline — commit: BRAIN Arrange approved for {IdeaFolder} — intents 01–{N} created`
+
+---
+
 9. **Report**: Summary of changes + suggested Next action
+
+---
+
+## Iterate Phase — Intent Lifecycle
+
+When executing each intent:
+
+1. Work through the intent steps
+2. Fill in the **Outcome** section of the intent file when complete
+3. Update Status.md row to `Done`
+
+### Aline Commit: Intent Done
+After each intent is marked Done:
+> `use aline — commit: Intent {N} done: {ShortName} — {one-line outcome}`
+
+### Dissolution Prompt (manual trigger)
+After marking an intent Done, Claude **must** prompt the user:
+
+> "Intent {N} ({ShortName}) is marked Done.
+> Want to dissolve it? Dissolution will:
+> - Extract Goal, Outcome, Key Decisions, and Follow-ups
+> - Append a summary entry to `Memory/{IdeaFolder}.md`
+> - Commit the memory entry via Aline
+> - Delete the intent file (`{N}-{ShortName}.md`)
+> - Mark the Status.md row as `Dissolved ✓`
+>
+> Reply **yes** to dissolve, **no** to keep the file."
+
+If user says **yes** → run the `/dissolve` command for that intent.
+If user says **no** → leave the file in place, no action.
+
+---
+
+## Next Phase — Session End
+
+When the user reaches the Next phase (deciding what comes after):
+
+### Aline Commit: Session End
+> `use aline — commit: session end — {IdeaFolder} status: {Active|Paused|Complete}`
+
+Then present the user with options:
+- Continue with the next intent
+- Pause (note revisit trigger in Status.md)
+- Switch to a different project
+- Add new intents to the backlog
 
 ---
 

@@ -64,6 +64,32 @@ If you notice something that could be improved (error handling, refactoring, log
 - Use MCP tools for external actions (GitHub, cloud, APIs)
 - Stop and ask if a required capability doesn't exist
 
+## Aline Checkpoint — Natural Pause Points
+
+At natural pause points in any session (inside or outside the BRAIN flow), Claude must detect the moment and offer an Aline memory update.
+
+### What counts as a natural pause point
+
+- Any git commit just completed
+- A task, bug, or feature is confirmed done by the user
+- The user signals session end: "that's all", "done for now", "thanks", "wrap up"
+- A significant decision was made that should be remembered across sessions
+
+### What to do at a pause point
+
+1. Generate a smart 1-line summary of what was accomplished in this session/phase
+2. Ask the user:
+   > "Want me to update Aline? → '{your 1-line summary}'"
+3. If user says **yes** → call `use aline — commit: {summary}`
+4. If user says **no** → skip silently, no follow-up
+
+### Rules
+
+- **Never commit to Aline silently** — always show the summary and ask first
+- **Never ask at every turn** — only at genuine pause points, not mid-task
+- Keep the summary factual: what was done, what was decided, what comes next
+- Inside a BRAIN session, Aline is already called at phase gates — do not double-commit
+
 ## On Failure
 
 If a tool rejects an action, explain the failure and ask for guidance. Do not retry blindly.

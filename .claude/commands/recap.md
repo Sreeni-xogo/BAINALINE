@@ -6,6 +6,11 @@ Summarize the current project state to re-establish context.
 
 Run these checks and present a concise summary:
 
+0. **Aline Recall (always first)**
+   - Call `use aline — what was I last working on in this project?`
+   - Summarise any prior context returned: last session decisions, dissolved intents, blockers resolved
+   - If Aline returns nothing, note "No prior Aline context found" and continue
+
 1. **Git State**
    - Current branch
    - Clean or uncommitted changes?
@@ -20,13 +25,20 @@ Run these checks and present a concise summary:
    - Find the most recently modified intent folder
    - If a `Status.md` exists, report current intent status
 
-4. **Open Questions**
-   - Any blockers or decisions noted in intent files?
+4. **Dissolved Intent Memory**
+   - Check if `Memory/` folder exists
+   - If yes, read `Memory/{ProjectName}.md` and note any relevant past outcomes or follow-ups
+   - If empty or missing, skip silently
+
+5. **Open Questions**
+   - Any blockers or decisions noted in intent files or Memory?
 
 ## Output Format
 
 ```
 ## Project Recap
+
+**Aline Context:** {summary of prior session context, or "No prior Aline context found"}
 
 **Branch:** {branch} ({clean/uncommitted changes})
 **Recent commits:**
@@ -41,8 +53,11 @@ Run these checks and present a concise summary:
 - {Intent folder}: {current intent or "no intents started"}
 - Status: {from Status.md or "unknown"}
 
+**Past Work (dissolved):**
+- {summary from Memory/{Project}.md, or "none yet"}
+
 **Notes:**
-- {any blockers, decisions, or open questions}
+- {any blockers, decisions, or open questions from intents or Memory}
 ```
 
 ---
