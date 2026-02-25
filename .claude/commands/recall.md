@@ -19,7 +19,7 @@ find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -5
 
 Run the search utility with the keyword from the user's query:
 ```
-python3 .claude/hooks/search-jsonl.py <jsonl-file-path> <keyword>
+python3 ~/.claude/hooks/search-jsonl.py <jsonl-file-path> <keyword>
 ```
 
 Try multiple keywords if the first has no matches:

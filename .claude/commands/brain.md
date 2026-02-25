@@ -176,7 +176,7 @@ DECISION [topic]: <what was decided> | Reason: <why>
 - `DECISION [structure]: flat intent files | Reason: avoids nesting complexity`
 
 This ensures decisions are greppable in the JSONL and survive `/compact` as labeled entries.
-The PreCompact hook (`.claude/hooks/pre-compact-decisions.sh`) preserves these labels automatically.
+The PreCompact hook (`~/.claude/hooks/pre-compact-decisions.sh`) preserves these labels automatically.
 Use `/recall <topic>` in any future session to retrieve them.
 
 ---
