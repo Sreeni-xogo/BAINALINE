@@ -162,6 +162,25 @@ Created automatically on first dissolution. Never manually edited.
 
 ---
 
+## Decision Labeling Convention
+
+During any BRAIN session, when a significant technical choice is made, label it inline in your response:
+
+```
+DECISION [topic]: <what was decided> | Reason: <why>
+```
+
+**Examples:**
+- `DECISION [framework]: Playwright over Cypress | Reason: better TypeScript support`
+- `DECISION [auth]: cookie-based via curl | Reason: page requires session auth`
+- `DECISION [structure]: flat intent files | Reason: avoids nesting complexity`
+
+This ensures decisions are greppable in the JSONL and survive `/compact` as labeled entries.
+The PreCompact hook (`.claude/hooks/pre-compact-decisions.sh`) preserves these labels automatically.
+Use `/recall <topic>` in any future session to retrieve them.
+
+---
+
 ## Execution Order
 
 ### Step 0 — Recent Session Memory (always first)

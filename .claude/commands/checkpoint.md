@@ -31,6 +31,13 @@
 - HH:MM | EventType | ProjectName — summary
 ```
 
+## Decision Labeling
+Label any significant decisions made this session as:
+```
+DECISION [topic]: <what was decided> | Reason: <why>
+```
+These are preserved through `/compact` and searchable via `/recall <topic>`.
+
 ## Notes
 - Append-only — never edit existing entries
 - One line per event
