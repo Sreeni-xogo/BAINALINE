@@ -29,5 +29,18 @@
     ]
   },
 
-  "env": {}
+  "env": {},
+
+  "hooks": {
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/pre-compact-decisions.sh"
+          }
+        ]
+      }
+    ]
+  }
 }
