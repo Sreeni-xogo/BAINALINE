@@ -164,11 +164,12 @@ Created automatically on first dissolution. Never manually edited.
 
 ## Execution Order
 
-### Step 0 — Aline Recall (before anything else)
-Call Aline to retrieve prior context for this idea:
-> `use aline — what was I last working on for {IdeaTitle}?`
-
-If Aline returns prior context, summarise it for the user before proceeding to Step 1.
+### Step 0 — Recent Session Memory (always first)
+- Read `Memory/_sessions.md` — last 10 entries (or all if file is small)
+- If `Memory/{IdeaFolder}.md` exists, read it for prior dissolved intent context
+- If `Memory/.local/_index.md` exists, note available JSONL files for deep reads
+- Summarise: last event type, feature worked on, outcome
+- If nothing found, note "No session memory yet" and continue
 
 ---
 
@@ -182,9 +183,12 @@ If Aline returns prior context, summarise it for the user before proceeding to S
    - Map each question to a missing Refine field
    - Allow `TBD` answers
 
-### Step 4b — Aline Commit: Refine Locked
+### Step 4b — Memory Write: Refine Locked
 After Refine interview is complete and scope is locked in CONTEXT.md:
-> `use aline — commit: BRAIN Refine locked for {IdeaFolder} — goal: {one-line goal summary}`
+- Read `Memory/_sessions.md` (or create if missing)
+- Append under today's `## YYYY-MM-DD` header:
+  `- {HH:MM} | BRAIN Refine | {IdeaFolder} — goal: {one-line goal summary}`
+- If `Memory/.local/_index.md` exists (or create it): append same entry
 
 ---
 
@@ -196,9 +200,11 @@ After Refine interview is complete and scope is locked in CONTEXT.md:
 7. **Create intent files**: Continue numbering from highest existing N
 8. **Create/update Status.md**
 
-### Step 7b — Aline Commit: Arrange Approved
+### Step 7b — Memory Write: Arrange Approved
 After intent files are created:
-> `use aline — commit: BRAIN Arrange approved for {IdeaFolder} — intents 01–{N} created`
+- Append to `Memory/_sessions.md` under today's header:
+  `- {HH:MM} | BRAIN Arrange | {IdeaFolder} — intents 01–{N} created`
+- If `Memory/.local/_index.md` exists (or create it): append same entry
 
 ---
 
@@ -214,9 +220,11 @@ When executing each intent:
 2. Fill in the **Outcome** section of the intent file when complete
 3. Update Status.md row to `Done`
 
-### Aline Commit: Intent Done
+### Memory Write: Intent Done
 After each intent is marked Done:
-> `use aline — commit: Intent {N} done: {ShortName} — {one-line outcome}`
+- Append to `Memory/_sessions.md` under today's header:
+  `- {HH:MM} | Intent Done | {IdeaFolder} — Intent {N} {ShortName}: {one-line outcome}`
+- If `Memory/.local/_index.md` exists (or create it): append same entry
 
 ### Dissolution Prompt (manual trigger)
 After marking an intent Done, Claude **must** prompt the user:
@@ -225,7 +233,6 @@ After marking an intent Done, Claude **must** prompt the user:
 > Want to dissolve it? Dissolution will:
 > - Extract Goal, Outcome, Key Decisions, and Follow-ups
 > - Append a summary entry to `Memory/{IdeaFolder}.md`
-> - Commit the memory entry via Aline
 > - Delete the intent file (`{N}-{ShortName}.md`)
 > - Mark the Status.md row as `Dissolved ✓`
 >
@@ -240,8 +247,10 @@ If user says **no** → leave the file in place, no action.
 
 When the user reaches the Next phase (deciding what comes after):
 
-### Aline Commit: Session End
-> `use aline — commit: session end — {IdeaFolder} status: {Active|Paused|Complete}`
+### Memory Write: Session End
+- Append to `Memory/_sessions.md` under today's header:
+  `- {HH:MM} | Session End | {IdeaFolder} — status: {Active|Paused|Complete}`
+- If `Memory/.local/_index.md` exists (or create it): append same entry
 
 Then present the user with options:
 - Continue with the next intent

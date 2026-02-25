@@ -10,6 +10,7 @@ CLAUDE.local.md
 *.key
 *.pem
 secrets/
+Memory/.local/
 
 # IDE and editor
 .vscode/

@@ -64,31 +64,27 @@ If you notice something that could be improved (error handling, refactoring, log
 - Use MCP tools for external actions (GitHub, cloud, APIs)
 - Stop and ask if a required capability doesn't exist
 
-## Aline Checkpoint — Natural Pause Points
+## Memory Checkpoint — Natural Pause Points
 
-At natural pause points in any session (inside or outside the BRAIN flow), Claude must detect the moment and offer an Aline memory update.
+At natural pause points, Claude appends a 1-line summary to `Memory/_sessions.md`.
 
 ### What counts as a natural pause point
+- A git commit just completed
+- A task, bug, or feature is confirmed done
+- User signals session end: "that's all", "done for now", "thanks", "wrap up"
+- A significant decision was made that should persist across sessions
 
-- Any git commit just completed
-- A task, bug, or feature is confirmed done by the user
-- The user signals session end: "that's all", "done for now", "thanks", "wrap up"
-- A significant decision was made that should be remembered across sessions
-
-### What to do at a pause point
-
-1. Generate a smart 1-line summary of what was accomplished in this session/phase
+### What to do
+1. Generate a smart 1-line summary of what was accomplished
 2. Ask the user:
-   > "Want me to update Aline? → '{your 1-line summary}'"
-3. If user says **yes** → call `use aline — commit: {summary}`
-4. If user says **no** → skip silently, no follow-up
+   > "Want me to save this to Memory? → '{your 1-line summary}'"
+3. If yes → append to `Memory/_sessions.md` (and `Memory/.local/_index.md` if on same machine)
+4. If no → skip silently
 
 ### Rules
-
-- **Never commit to Aline silently** — always show the summary and ask first
-- **Never ask at every turn** — only at genuine pause points, not mid-task
-- Keep the summary factual: what was done, what was decided, what comes next
-- Inside a BRAIN session, Aline is already called at phase gates — do not double-commit
+- Never write to Memory silently — always show the summary and ask first
+- Never ask at every turn — only at genuine pause points
+- Inside BRAIN sessions, memory writes happen at phase gates — do not double-write
 
 ## On Failure
 

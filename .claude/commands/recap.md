@@ -6,10 +6,11 @@ Summarize the current project state to re-establish context.
 
 Run these checks and present a concise summary:
 
-0. **Aline Recall (always first)**
-   - Call `use aline — what was I last working on in this project?`
-   - Summarise any prior context returned: last session decisions, dissolved intents, blockers resolved
-   - If Aline returns nothing, note "No prior Aline context found" and continue
+0. **Recent Session Memory (always first)**
+   - Read `Memory/_sessions.md` — last 10 entries (or all if file is small)
+   - If `Memory/.local/_index.md` exists, note available JSONL files for deep reads
+   - Summarise: last event type, feature worked on, outcome
+   - If nothing found, note "No session memory yet" and continue
 
 1. **Git State**
    - Current branch
@@ -38,7 +39,7 @@ Run these checks and present a concise summary:
 ```
 ## Project Recap
 
-**Aline Context:** {summary of prior session context, or "No prior Aline context found"}
+**Recent Sessions:** {summary of last session, or "No session memory yet"}
 
 **Branch:** {branch} ({clean/uncommitted changes})
 **Recent commits:**
