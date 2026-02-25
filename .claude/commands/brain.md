@@ -97,7 +97,7 @@ Memory/
 
 ## Project State
 - **Status**: Active | Paused | Complete | Abandoned
-- **Reason**: (if paused/abandoned)
+- **Reason**: (if paused/abandoned/complete)
 - **Revisit trigger**: (if paused)
 ```
 
