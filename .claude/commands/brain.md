@@ -188,7 +188,9 @@ After Refine interview is complete and scope is locked in CONTEXT.md:
 - Read `Memory/_sessions.md` (or create if missing)
 - Append under today's `## YYYY-MM-DD` header:
   `- {HH:MM} | BRAIN Refine | {IdeaFolder} — goal: {one-line goal summary}`
-- If `Memory/.local/_index.md` exists (or create it): append same entry
+- If `Memory/.local/_index.md` exists (or create it):
+  - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+  - Append same entry with `→ {uuid}.jsonl`
 
 ---
 
@@ -204,7 +206,9 @@ After Refine interview is complete and scope is locked in CONTEXT.md:
 After intent files are created:
 - Append to `Memory/_sessions.md` under today's header:
   `- {HH:MM} | BRAIN Arrange | {IdeaFolder} — intents 01–{N} created`
-- If `Memory/.local/_index.md` exists (or create it): append same entry
+- If `Memory/.local/_index.md` exists (or create it):
+  - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+  - Append same entry with `→ {uuid}.jsonl`
 
 ---
 
@@ -224,7 +228,9 @@ When executing each intent:
 After each intent is marked Done:
 - Append to `Memory/_sessions.md` under today's header:
   `- {HH:MM} | Intent Done | {IdeaFolder} — Intent {N} {ShortName}: {one-line outcome}`
-- If `Memory/.local/_index.md` exists (or create it): append same entry
+- If `Memory/.local/_index.md` exists (or create it):
+  - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+  - Append same entry with `→ {uuid}.jsonl`
 
 ### Dissolution Prompt (manual trigger)
 After marking an intent Done, Claude **must** prompt the user:
@@ -250,7 +256,9 @@ When the user reaches the Next phase (deciding what comes after):
 ### Memory Write: Session End
 - Append to `Memory/_sessions.md` under today's header:
   `- {HH:MM} | Session End | {IdeaFolder} — status: {Active|Paused|Complete}`
-- If `Memory/.local/_index.md` exists (or create it): append same entry
+- If `Memory/.local/_index.md` exists (or create it):
+  - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+  - Append same entry with `→ {uuid}.jsonl`
 
 Then present the user with options:
 - Continue with the next intent

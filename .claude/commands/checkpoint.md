@@ -18,7 +18,8 @@
    b. Append under today's `## YYYY-MM-DD` header:
       `- {HH:MM} | Checkpoint | {ProjectName} — {summary}`
    c. If `Memory/.local/_index.md` exists (or create it):
-      Append same entry with `→ {current-session-uuid}.jsonl`
+      - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+      - Append same entry with `→ {uuid}.jsonl`
 5. If no → skip silently
 
 ## Memory/_sessions.md format

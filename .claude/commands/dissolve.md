@@ -125,7 +125,9 @@ Memory/
 5. **Memory Write:**
    - Append to `Memory/_sessions.md` under today's header:
      `- {HH:MM} | Dissolved | {IdeaFolder} — Intent {N} {ShortName}: {one-line outcome}`
-   - If `Memory/.local/_index.md` exists (or create it): append same entry
+   - If `Memory/.local/_index.md` exists (or create it):
+     - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+     - Append same entry with `→ {uuid}.jsonl`
 
 6. **Delete** the intent file: `Intents/{IdeaFolder}/{N}-*.md`
 
@@ -142,7 +144,7 @@ Memory/
 
 9. **Prompt** the user:
    > "All intents in {IdeaFolder} are dissolved. Want to dissolve the feature folder too?
-   > This will collapse CONTEXT.md + Status.md into `Memory/{IdeaFolder}.md`, commit to Aline, and delete the folder."
+   > This will collapse CONTEXT.md + Status.md into `Memory/{IdeaFolder}.md`, write to Memory/_sessions.md, and delete the folder."
 
 10. If **yes**:
 
@@ -167,7 +169,9 @@ Memory/
     d. **Memory Write:**
        - Append to `Memory/_sessions.md` under today's header:
          `- {HH:MM} | Dissolved | {IdeaFolder} — all {N} intents complete, feature closed`
-       - If `Memory/.local/_index.md` exists (or create it): append same entry
+       - If `Memory/.local/_index.md` exists (or create it):
+         - Get UUID: `find ~/.claude/projects -name "*.jsonl" | xargs ls -t 2>/dev/null | head -1 | xargs basename | sed 's/\.jsonl//'`
+         - Append same entry with `→ {uuid}.jsonl`
 
     e. **Delete** `CONTEXT.md` and `Status.md`
 
