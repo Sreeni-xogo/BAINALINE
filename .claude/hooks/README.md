@@ -9,6 +9,7 @@ Hooks allow you to run scripts at specific points in Claude Code's workflow.
 | `PreToolUse` | Before a tool executes (can block) |
 | `PostToolUse` | After a tool completes |
 | `UserPromptSubmit` | When user submits a prompt |
+| `PreCompact` | Before /compact runs — used for pre-compact-decisions.sh |
 
 ## Configuration
 

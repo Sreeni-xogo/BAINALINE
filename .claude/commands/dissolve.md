@@ -64,7 +64,7 @@ User: yes →
   1. Read CONTEXT.md — extract Goal, scope, constraints, DoD
   2. Read Status.md — extract full intent table + project state
   3. Append Feature Summary block to Memory/{IdeaFolder}.md
-  4. Aline commit: "dissolved feature {IdeaFolder} — all intents complete"
+  4. Write to Memory/_sessions.md: "dissolved feature {IdeaFolder} — all intents complete"
   5. Delete CONTEXT.md and Status.md
   6. Delete the now-empty Intents/{IdeaFolder}/ folder
 
